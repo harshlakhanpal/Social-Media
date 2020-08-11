@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js ",
     "server": "nodemon",
-    "client": "cd ../client && yarn start",
-    "dev": "concurrently \"yarn serve\" \"yarn client\""
+    "client": "cd ./client && yarn start",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "keywords": [],
   "author": "",

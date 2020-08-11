@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
 import { useHistory } from "react-router-dom";
-import Loader from "./Loader";
+// import Loader from "./Loader";
 
 const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   //   const handleLogin = async () => {
@@ -22,8 +22,8 @@ const Login = () => {
   //  } catch (err) {
   //    console.log(err);
   //  }
-  let [userLogin, { called, loading, data, error }] = useLazyQuery(login, {
-    variables: { email, password },
+  let [userLogin, { called, loading, data, error }] = useMutation(login, {
+    variables: { username, password },
     pollInterval: 0,
   });
   //  await userLogin();
@@ -38,7 +38,7 @@ const Login = () => {
 
     history.push("/shop");
   }
-  if (loading) return <Loader />;
+  //   if (loading) return <Loader />;
 
   //   };
   return (
@@ -46,9 +46,9 @@ const Login = () => {
       <div>Login</div>
       <input
         className="input"
-        value={email}
-        onChange={({ target: { value } }) => setEmail(value)}
-        placeholder="Email"
+        value={username}
+        onChange={({ target: { value } }) => setUsername(value)}
+        placeholder="Username"
       />
 
       <input
