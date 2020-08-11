@@ -6,7 +6,7 @@ const expressPlayground = require("graphql-playground-middleware-express")
   .default;
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const schema = require("./schema");
+const schema = require("./schema");
 
 const port = process.env.PORT || 5000;
 const app = express();
