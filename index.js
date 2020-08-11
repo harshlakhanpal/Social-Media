@@ -8,16 +8,10 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 // const schema = require("./schema");
 
-// require("dotenv").config();
-
 const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors(), bodyParser.json());
-
-// app.use("/auth", authRoutes);
-
-// const checkToken = expressJwt({ secret: "mysecret", algorithms: ["RS256"] });
 
 app.use(
   "/graphql",
