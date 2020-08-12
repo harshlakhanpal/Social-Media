@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
 import { useHistory } from "react-router-dom";
-import { Flex } from "@adobe/react-spectrum";
+import { Flex, TextField, Heading } from "@adobe/react-spectrum";
 // import Loader from "./Loader";
 
 const Login = () => {
@@ -10,24 +10,11 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  //   const handleLogin = async () => {
-  //  try {
-  //    const { data } = await axios.post("http://localhost:5000/auth/login", {
-  //      email,
-  //      password,
-  //    });
-  //    console.log(data);
-  //    console.log(JSON.stringify(data));
-  //    localStorage.setItem("token", JSON.stringify(data.token));
-  //    history.push("/user");
-  //  } catch (err) {
-  //    console.log(err);
-  //  }
   let [userLogin, { called, loading, data, error }] = useMutation(login, {
     variables: { username, password },
     pollInterval: 0,
   });
-  //  await userLogin();
+
   console.log(loading, data, error);
   if (error) {
     loading = false;
@@ -37,33 +24,34 @@ const Login = () => {
     localStorage.setItem("token", JSON.stringify(data.login.token));
     localStorage.setItem("user", JSON.stringify(data.login));
 
-    history.push("/shop");
+    history.push("/home");
   }
-  //   if (loading) return <Loader />;
 
-  //   };
   return (
     <Flex
       direction="column"
       alignItems="center"
       justifyContent="center"
       gap="size-50"
+      UNSAFE_className="neumorphic"
     >
-      <div>Login</div>
-      <input
-        className="input"
+      <Heading level="1">Login</Heading>
+      <TextField
+        label="Username"
+        name="username"
         value={username}
-        onChange={({ target: { value } }) => setUsername(value)}
-        placeholder="Username"
+        onChange={setUsername}
+        placeholder="Enter your username"
       />
 
-      <input
+      <TextField
+        label="Password"
+        name="password"
         type="password"
-        className="input"
         value={password}
         //   onPressEnter={handleLogin}
-        onChange={({ target: { value } }) => setPassword(value)}
-        placeholder="Password"
+        onChange={setPassword}
+        placeholder="Enter your password"
       />
       <br />
 

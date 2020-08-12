@@ -5,24 +5,22 @@ import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import Loader from "./Loader";
 import { register } from "../queries";
 import { useHistory } from "react-router-dom";
-import { Flex } from "@adobe/react-spectrum";
+import { Flex, TextField, Heading } from "@adobe/react-spectrum";
 
-const Login = () => {
+const Register = () => {
   const history = useHistory();
-  const [values, setValues] = useState({});
-
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [userRegister, { loading }] = useMutation(register);
-
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
 
   const userRegistration = async () => {
     try {
       await userRegister({
-        variables: { ...values },
+        variables: { username, email, password, confirmPassword },
       });
-      history.push("/");
+      history.push("/login");
     } catch (error) {
       console.log(Object.keys(error), error.message);
     }
@@ -33,39 +31,37 @@ const Login = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      gap="size-50"
+      gap="size-25"
     >
-      <input
-        className="input"
-        name="username"
-        value={values.username}
-        onChange={handleChange}
-        placeholder="Username"
+      <Heading level="1">Register</Heading>
+      <TextField
+        label="Username"
+        value={username}
+        onChange={setUsername}
+        placeholder="Enter your Username"
       />
-      <input
-        className="input"
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-        placeholder="Email"
+      <TextField
+        label="Email"
+        value={email}
+        onChange={setEmail}
+        placeholder="Enter your Email"
       />
-      <input
+      <TextField
         type="password"
-        className="input"
-        name="password"
-        value={values.password}
+        value={password}
+        label="Password"
         //   onPressEnter={handleLogin}
-        onChange={handleChange}
-        placeholder="Password"
+        onChange={setPassword}
+        placeholder="Enter your Password"
       />
-      <input
+      <TextField
         type="password"
-        className="input"
         name="confirmPassword"
-        value={values.confirmPassword}
+        value={confirmPassword}
+        label="Confirm Password"
         //   onPressEnter={handleLogin}
-        onChange={handleChange}
-        placeholder="Confirm Password"
+        onChange={setConfirmPassword}
+        placeholder="Confirm your password"
       />
       <br />
 
@@ -83,4 +79,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

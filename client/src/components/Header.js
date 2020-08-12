@@ -4,7 +4,6 @@ import { Flex } from "@adobe/react-spectrum";
 const Header = () => {
   return (
     <Flex flexBasis="8%" justifyContent="space-between" alignItems="center">
-      <div>left</div>
       <div>Social Media</div>
       <div>right</div>
     </Flex>

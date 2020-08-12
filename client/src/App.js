@@ -1,6 +1,7 @@
 import React from "react";
 // import "./App.scss";
 import { Provider, defaultTheme, Flex } from "@adobe/react-spectrum";
+import Landing from "./components/Landing";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -16,9 +17,10 @@ function App() {
         <Header />
         <Flex flexBasis="90%" alignItems="center" justifyContent="center">
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <PrivateRoute exact path="/home" component={Home} />
 
             <PageNotFound />
           </Switch>
