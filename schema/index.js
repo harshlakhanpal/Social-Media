@@ -209,6 +209,62 @@ const Mutation = new GraphQLObjectType({
         }
       },
     },
+
+    createComment: {
+      type: PostType,
+      args: {
+        postId: { type: new GraphQLNonNull(GraphQLID) },
+        body: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(parent, { postId, body }, context) {
+        const { id } = authCheck(context);
+        const user = await User.findById(id);
+        if (body.trim() === "") {
+          throw new Error("Empty comment", {
+            errors: { body: "Comment body cannot be empty" },
+          });
+        }
+        const post = await Post.findById(postId);
+        if (post) {
+          post.comment.unshift({
+            body,
+            username: user.username,
+            createdAt: new Date().toISOString(),
+          });
+          await post.save();
+          return post;
+        } else throw new Error("Post not found");
+      },
+    },
+
+    deleteComment: {
+      type: PostType,
+      args: {
+        postId: { type: new GraphQLNonNull(GraphQLID) },
+        commentID: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args, context) {
+        const { postId, commentID } = args;
+        const { id } = authCheck(context);
+        const user = await User.findById(id);
+        const post = await Post.findById(postId);
+        if (post) {
+          const commentIndex = post.comments.findIndex(
+            (c) => c.id === commentID
+          );
+          if ((post.comments[commentIndex].username = user.username)) {
+            post.comments.splice(commentIndex, 1);
+            await post.save();
+            return post;
+          } else throw new Error("Action not allowed");
+        } else throw new Error("Post not found");
+      },
+    },
+
+    likePost: {
+      type: PostType,
+      args: { postId: { type: new GraphQLNonNull(GraphQLID) } },
+    },
   },
 });
 
