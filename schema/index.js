@@ -1,12 +1,13 @@
 const graphql = require("graphql");
 const User = require("../models/user");
+const Post = require("../models/post");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {
   validateUserRegistration,
   validateUserLogin,
 } = require("../util/validations.js");
-
+const authCheck = require("../util/auth");
 const {
   GraphQLObjectType,
   GraphQLInt,
@@ -28,13 +29,44 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
+const PostType = new GraphQLObjectType({
+  name: "Post",
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: new GraphQLNonNull(GraphQLString) },
+    body: { type: new GraphQLNonNull(GraphQLString) },
+    createdAt: { type: new GraphQLNonNull(GraphQLString) },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    hello: {
-      type: GraphQLString,
-      resolve(parent, args) {
-        return "Hello";
+    getPosts: {
+      type: new GraphQLList(PostType),
+      async resolve(parent, args) {
+        try {
+          const posts = await Post.find().sort({ createdAt: -1 });
+          return posts;
+        } catch (err) {
+          throw new Error(err);
+        }
+      },
+    },
+    getPost: {
+      type: PostType,
+      args: {
+        postId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args) {
+        const { postId } = args;
+        try {
+          const post = await Post.findById(postId);
+          if (post) return post;
+          else throw new Error("Post not found");
+        } catch (err) {
+          throw new Error(err);
+        }
       },
     },
   },
@@ -116,6 +148,44 @@ const Mutation = new GraphQLObjectType({
 
         const token = jwt.sign({ id: user.id }, "mysecret");
         return { token, id: user._id, ...user._doc };
+      },
+    },
+    createPost: {
+      type: PostType,
+      args: { body: { type: new GraphQLNonNull(GraphQLString) } },
+      async resolve(parent, { body }, context) {
+        const { id } = authCheck(context);
+        const user = await User.findById(id);
+        console.log(user);
+        const newPost = new Post({
+          body,
+          user: user.id,
+          username: user.username,
+          createdAt: new Date().toISOString(),
+        });
+        const post = await newPost.save();
+        return post;
+      },
+    },
+
+    deletePost: {
+      type: GraphQLString,
+      args: {
+        postId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(parent, args, context) {
+        const { postId } = args;
+        const { id } = authCheck(context);
+        const user = await User.findById(id);
+        try {
+          const post = await Post.findById(postId);
+          if (user.username === post.username) {
+            await Post.findByIdAndRemove(postId);
+            return "Post Deleted";
+          } else return "Action not allowed";
+        } catch (err) {
+          return `${err}`;
+        }
       },
     },
   },
