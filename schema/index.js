@@ -36,6 +36,27 @@ const PostType = new GraphQLObjectType({
     username: { type: new GraphQLNonNull(GraphQLString) },
     body: { type: new GraphQLNonNull(GraphQLString) },
     createdAt: { type: new GraphQLNonNull(GraphQLString) },
+    comments: { type: new GraphQLList(new GraphQLNonNull(CommentType)) },
+    likes: { type: new GraphQLList(new GraphQLNonNull(LikeType)) },
+  }),
+});
+
+const CommentType = new GraphQLObjectType({
+  name: "Comment",
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: new GraphQLNonNull(GraphQLString) },
+    body: { type: new GraphQLNonNull(GraphQLString) },
+    createdAt: { type: new GraphQLNonNull(GraphQLString) },
+  }),
+});
+
+const LikeType = new GraphQLObjectType({
+  name: "Like",
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: new GraphQLNonNull(GraphQLString) },
+    createdAt: { type: new GraphQLNonNull(GraphQLString) },
   }),
 });
 
