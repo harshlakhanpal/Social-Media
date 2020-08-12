@@ -8,6 +8,7 @@ import {
   Text,
   Content,
   View,
+  Dialog,
   ProgressCircle,
 } from "@adobe/react-spectrum";
 
@@ -22,7 +23,11 @@ const Home = () => {
   console.log(posts);
   return (
     <View width="100%" height="100%">
-      {loading && <ProgressCircle aria-label="Loading…" isIndeterminate />}
+      {loading && (
+        <Dialog position="fixed" top="45%" left="45%">
+          <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
+        </Dialog>
+      )}
       {posts.map(({ username, body }) => (
         <View
           borderWidth="thin"

@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
 import { useHistory } from "react-router-dom";
-import { Flex, TextField, Heading } from "@adobe/react-spectrum";
+import {
+  Flex,
+  TextField,
+  Heading,
+  ProgressCircle,
+  Dialog,
+} from "@adobe/react-spectrum";
 // import Loader from "./Loader";
 
 const Login = () => {
@@ -17,7 +23,6 @@ const Login = () => {
 
   console.log(loading, data, error);
   if (error) {
-    loading = false;
     console.log(error.message);
   }
   if (data) {
@@ -35,6 +40,11 @@ const Login = () => {
       gap="size-50"
       UNSAFE_className="neumorphic"
     >
+      {loading && (
+        <Dialog position="fixed" top="45%" left="45%">
+          <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
+        </Dialog>
+      )}
       <Heading level="1">Login</Heading>
       <TextField
         label="Username"
