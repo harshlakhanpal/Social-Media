@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
 import { useHistory } from "react-router-dom";
+import { Flex } from "@adobe/react-spectrum";
 // import Loader from "./Loader";
 
 const Login = () => {
@@ -42,7 +43,12 @@ const Login = () => {
 
   //   };
   return (
-    <div className="login neumorphic">
+    <Flex
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      gap="size-50"
+    >
       <div>Login</div>
       <input
         className="input"
@@ -71,7 +77,7 @@ const Login = () => {
         Login
       </button>
       <br />
-    </div>
+    </Flex>
   );
 };
 

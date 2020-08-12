@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.scss";
+// import "./App.scss";
+import { Provider, defaultTheme, Flex } from "@adobe/react-spectrum";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -10,18 +11,20 @@ import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <div className="content">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
+    <Provider theme={defaultTheme}>
+      <Flex direction="column" width="100%" height="96vh">
+        <Header />
+        <Flex flexBasis="90%" alignItems="center" justifyContent="center">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
 
-          <PageNotFound />
-        </Switch>
-      </div>
-    </div>
+            <PageNotFound />
+          </Switch>
+        </Flex>
+      </Flex>
+    </Provider>
   );
 }
 

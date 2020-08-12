@@ -1,12 +1,13 @@
 import React from "react";
+import { Flex } from "@adobe/react-spectrum";
 
 const Header = () => {
   return (
-    <div className="header">
-      <div className="left-menu">left</div>
-      <div className="logo">Social Media</div>
-      <div className="right-menu">right</div>
-    </div>
+    <Flex flexBasis="8%" justifyContent="space-between" alignItems="center">
+      <div>left</div>
+      <div>Social Media</div>
+      <div>right</div>
+    </Flex>
   );
 };
 export default Header;
