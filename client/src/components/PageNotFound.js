@@ -1,19 +1,15 @@
 import React from "react";
-import styled from "styled-components";
+import { IllustratedMessage, Heading, Content } from "@adobe/react-spectrum";
 
-const Container = styled.div`
-  font-size: 1.6rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 50px;
-  opacity: 0.6;
-`;
+// import NotFound from "@spectrum-icons/illustrations/NotFound";
 
 const PageNotFound = () => (
-  <section>
-    <Container>404: Page Not Found</Container>
-  </section>
+  <IllustratedMessage>
+    <Heading>Error 404: Page not found</Heading>
+    <Content>
+      This page isn't available. Try checking the URL or visit a different page.
+    </Content>
+  </IllustratedMessage>
 );
 
 export default PageNotFound;
