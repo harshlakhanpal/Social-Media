@@ -1,5 +1,16 @@
 import { gql } from "apollo-boost";
 
+const getPosts = gql`
+  query {
+    getPosts {
+      username
+      body
+      id
+      createdAt
+    }
+  }
+`;
+
 const login = gql`
   mutation($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -33,4 +44,4 @@ const register = gql`
   }
 `;
 
-export { login, register };
+export { login, register, getPosts };

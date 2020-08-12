@@ -1,20 +1,19 @@
 import React from "react";
+import { View, Button, Heading } from "@adobe/react-spectrum";
 import { useHistory } from "react-router-dom";
 
 const Landing = () => {
   const history = useHistory();
   return (
-    <section>
-      <div className="title">Welcome</div>
-      <div className="button-group">
-        <button className="button" onClick={() => history.push("/login")}>
-          Login
-        </button>
-        <button className="button" onClick={() => history.push("/register")}>
-          Sign up
-        </button>
-      </div>
-    </section>
+    <View>
+      <Heading level="1" className="title">
+        Welcome
+      </Heading>
+      <>
+        <Button onClick={() => history.push("/login")}>Login</Button>
+        <Button onClick={() => history.push("/register")}>Sign up</Button>
+      </>
+    </View>
   );
 };
 
