@@ -264,6 +264,26 @@ const Mutation = new GraphQLObjectType({
     likePost: {
       type: PostType,
       args: { postId: { type: new GraphQLNonNull(GraphQLID) } },
+      async resolve(parent, { postId }, context) {
+        const { id } = authCheck(context);
+        const user = await User.findById(id);
+
+        const post = await Post.findById(postId);
+        if (post) {
+          if (post.likes.find((like) => like.username === user.username)) {
+            post.likes = post.likes.filter(
+              (like) => like.username !== user.username
+            );
+          } else {
+            post.likes.push({
+              username: user.username,
+              createdAt: new Date().toISOString(),
+            });
+          }
+          await post.save();
+          return post;
+        } else throw new Error("Post not found");
+      },
     },
   },
 });
