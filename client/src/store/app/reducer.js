@@ -1,14 +1,14 @@
 const initialState = {
-  check: false,
+  drawerVisibility: false,
   user: {},
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case "CHECK":
+    case "TOGGLE_DRAWER":
       return {
         ...state,
-        check: !state.check,
+        drawerVisibility: !state.drawerVisibility,
       };
     case "LOGIN":
       return {

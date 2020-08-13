@@ -1,28 +1,29 @@
 import React from "react";
-import { Flex } from "@adobe/react-spectrum";
-import { useSelector } from "react-redux";
+import { Flex, Heading } from "@adobe/react-spectrum";
+import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleDrawer } from "../store/app/actions";
 
 const Header = () => {
   const loggedIn = useSelector((state) => state.app.user);
-
-  const HeaderReturn = () => {
-    console.log(loggedIn);
-    if (Object.keys(loggedIn).length > 0) {
-      return (
-        <Flex flexBasis="8%" justifyContent="space-between" alignItems="center">
-          <div>Social Media</div>
-          <div>right</div>
-        </Flex>
-      );
-    } else {
-      return (
-        <Flex flexBasis="8%" justifyContent="center" alignItems="center">
-          <div>Social Media</div>
-        </Flex>
-      );
-    }
-  };
-
-  return HeaderReturn();
+  const checkLoggedIn =
+    Object.keys(loggedIn).length > 0 || localStorage.getItem("user")
+      ? true
+      : false;
+  const dispatch = useDispatch();
+  return (
+    <Flex
+      flexBasis="8%"
+      justifyContent={`${checkLoggedIn ? "space-between" : "center"}`}
+      alignItems="center"
+    >
+      <Heading level="1">Social Media</Heading>
+      {checkLoggedIn && (
+        <span onClick={() => dispatch(toggleDrawer())}>
+          <ShowMenu aria-label="showmenu" size="S" />
+        </span>
+      )}
+    </Flex>
+  );
 };
 export default Header;

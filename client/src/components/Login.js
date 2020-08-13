@@ -47,7 +47,7 @@ const Login = () => {
       UNSAFE_className="neumorphic"
     >
       {loading && (
-        <Dialog position="fixed" top="45%" left="45%" zIndex="1000">
+        <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}

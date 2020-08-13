@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <View width="100%" height="100%">
       {loading && (
-        <Dialog position="fixed" top="45%" left="45%">
+        <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}

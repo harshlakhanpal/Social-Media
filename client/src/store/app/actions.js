@@ -1,5 +1,5 @@
-export const check = () => {
-  return { type: "CHECK" };
+export const toggleDrawer = () => {
+  return { type: "TOGGLE_DRAWER" };
 };
 
 export const login = (data) => {
