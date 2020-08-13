@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Drawer from "./components/Drawer";
 import Register from "./components/Register";
+import Post from "./components/Post";
 import PageNotFound from "./components/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header";
@@ -23,6 +24,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute exact path="/home/:postId" component={Post} />
 
             <PageNotFound />
           </Switch>

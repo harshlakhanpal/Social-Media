@@ -11,6 +11,32 @@ const getPosts = gql`
   }
 `;
 
+const getPost = gql`
+  query($postId: ID!) {
+    getPost(postId: $postId) {
+      username
+      body
+      id
+      createdAt
+      comments {
+        username
+        body
+      }
+    }
+  }
+`;
+
+const createPost = gql`
+  mutation($body: String!) {
+    createPost(body: $body) {
+      username
+      body
+      id
+      createdAt
+    }
+  }
+`;
+
 const login = gql`
   mutation($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -44,4 +70,4 @@ const register = gql`
   }
 `;
 
-export { login, register, getPosts };
+export { login, register, getPosts, getPost, createPost };

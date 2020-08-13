@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { getPosts } from "../queries";
+import { useHistory } from "react-router-dom";
 import {
   Flex,
   TextField,
@@ -14,6 +15,7 @@ import {
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const history = useHistory();
   const { loading } = useQuery(getPosts, {
     onCompleted: (data) => {
       console.log(data);
@@ -28,21 +30,21 @@ const Home = () => {
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}
-      {posts.map(({ username, body }) => (
-        <span onClick={() => console.log("clicked")}>
-          <View
-            elementType="div"
-            borderWidth="thin"
-            borderColor="dark"
-            borderRadius="medium"
-            width="80%"
-            margin="auto"
-            marginTop="15px"
-          >
+      {posts.map(({ username, body, id }) => (
+        <View
+          elementType="div"
+          borderWidth="thin"
+          borderColor="dark"
+          borderRadius="medium"
+          width="80%"
+          margin="auto"
+          marginTop="15px"
+        >
+          <span onClick={() => history.push(`/home/${id}`)}>
             <Content>{body}</Content>
             <Text>{username}</Text>
-          </View>
-        </span>
+          </span>
+        </View>
       ))}
     </View>
   );

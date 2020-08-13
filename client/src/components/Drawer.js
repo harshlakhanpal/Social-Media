@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CloseCircle from "@spectrum-icons/workflow/CloseCircle";
+import StepForward from "@spectrum-icons/workflow/StepForward";
 
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";
@@ -31,8 +31,12 @@ const Drawer = () => {
         <DrawerContainer>
           <div>
             <span onClick={() => dispatch(toggleDrawer())}>
-              <CloseCircle aria-label="closecircle" size="S" />
+              <StepForward aria-label="stepforward" size="S" width="100%" />
             </span>
+
+            <div>Option1</div>
+            <div>Option2</div>
+            <div>Option3</div>
           </div>
         </DrawerContainer>
       ) : null}
