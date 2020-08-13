@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import StepForward from "@spectrum-icons/workflow/StepForward";
+import ArrowRight from "@spectrum-icons/workflow/ArrowRight";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";
@@ -32,7 +32,7 @@ const Drawer = () => {
         <DrawerContainer>
           <div>
             <span onClick={() => dispatch(toggleDrawer())}>
-              <StepForward aria-label="stepforward" size="S" width="100%" />
+              <ArrowRight aria-label="ArrowRight" size="S" width="100%" />
             </span>
 
             <div onClick={() => history.push("/home/create_post")}>Option1</div>

@@ -16,10 +16,17 @@ import CreatePost from "./components/CreatePost";
 const App = () => {
   return (
     <Provider theme={defaultTheme}>
-      <Flex direction="column" width="100%" height="96vh" position="relative">
+      <Flex
+        direction="column"
+        width="100%"
+        minHeight="100%"
+        height="96vh"
+        position="relative"
+      >
         <Header />
         <Drawer />
-        <Flex flexBasis="90%" alignItems="center" justifyContent="center">
+
+        <Flex height="100%" alignItems="center" justifyContent="center">
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
