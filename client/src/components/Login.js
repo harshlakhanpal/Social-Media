@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { check } from "../store/app/actions";
 import {
   Flex,
   TextField,
@@ -13,12 +15,16 @@ import {
 
 const Login = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   let [userLogin, { called, loading, data, error }] = useMutation(login, {
     variables: { username, password },
     pollInterval: 0,
+    onCompleted: () => {
+      dispatch(check());
+    },
   });
 
   console.log(loading, data, error);
