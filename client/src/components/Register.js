@@ -17,7 +17,7 @@ const Register = () => {
 
   const userRegistration = async () => {
     try {
-      await userRegister({
+      userRegister({
         variables: { username, email, password, confirmPassword },
       });
       history.push("/login");

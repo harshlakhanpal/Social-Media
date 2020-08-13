@@ -11,6 +11,7 @@ import PageNotFound from "./components/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header";
 import { Switch, Route } from "react-router-dom";
+import CreatePost from "./components/CreatePost";
 
 const App = () => {
   return (
@@ -24,6 +25,11 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRoute exact path="/home" component={Home} />
+            <PrivateRoute
+              exact
+              path="/home/create_post"
+              component={CreatePost}
+            />
             <PrivateRoute exact path="/home/:postId" component={Post} />
 
             <PageNotFound />

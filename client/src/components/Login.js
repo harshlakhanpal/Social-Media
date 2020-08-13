@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login as loginAction } from "../store/app/actions";
 import {
