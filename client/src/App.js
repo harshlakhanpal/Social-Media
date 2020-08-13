@@ -15,7 +15,7 @@ import CreatePost from "./components/CreatePost";
 
 const App = () => {
   return (
-    <Provider theme={defaultTheme}>
+    <Provider theme={defaultTheme} UNSAFE_style={{ background: "transparent" }}>
       <Flex
         direction="column"
         width="100%"
