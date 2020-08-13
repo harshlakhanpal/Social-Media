@@ -9,8 +9,12 @@ import PageNotFound from "./components/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header";
 import { Switch, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-function App() {
+const App = () => {
+  const check = useSelector((state) => state.app.check);
+  const dispatch = useDispatch();
+  console.log(check);
   return (
     <Provider theme={defaultTheme}>
       <Flex direction="column" width="100%" height="96vh">
@@ -28,6 +32,6 @@ function App() {
       </Flex>
     </Provider>
   );
-}
+};
 
 export default App;

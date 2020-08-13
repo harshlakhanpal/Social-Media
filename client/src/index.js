@@ -4,6 +4,9 @@ import ApolloClient from "apollo-boost";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloProvider } from "react-apollo";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import store from "./store";
 
 import "./index.css";
 import App from "./App";
@@ -17,7 +20,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </ApolloProvider>,
   document.getElementById("root")
