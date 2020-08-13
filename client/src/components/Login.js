@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { check } from "../store/app/actions";
+import { login as loginAction } from "../store/app/actions";
 import {
   Flex,
   TextField,
@@ -22,8 +22,8 @@ const Login = () => {
   let [userLogin, { called, loading, data, error }] = useMutation(login, {
     variables: { username, password },
     pollInterval: 0,
-    onCompleted: () => {
-      dispatch(check());
+    onCompleted: (data) => {
+      dispatch(loginAction(data.login));
     },
   });
 
@@ -47,7 +47,7 @@ const Login = () => {
       UNSAFE_className="neumorphic"
     >
       {loading && (
-        <Dialog position="fixed" top="45%" left="45%">
+        <Dialog position="fixed" top="45%" left="45%" zIndex="1000">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}

@@ -1,5 +1,6 @@
 const initialState = {
   check: false,
+  user: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -8,6 +9,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         check: !state.check,
+      };
+    case "LOGIN":
+      return {
+        ...state,
+        user: payload,
       };
 
     default:
