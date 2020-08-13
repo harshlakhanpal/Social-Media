@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login as loginAction } from "../store/app/actions";
 import {
@@ -19,24 +19,26 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    if (localStorage.getItem("user")) history.push("/home");
+  }, []);
+
   let [userLogin, { called, loading, data, error }] = useMutation(login, {
     variables: { username, password },
     pollInterval: 0,
     onCompleted: (data) => {
       dispatch(loginAction(data.login));
+      localStorage.setItem("token", JSON.stringify(data.login.token));
+      localStorage.setItem("user", JSON.stringify(data.login));
+
+      history.push("/home");
     },
   });
 
-  console.log(loading, data, error);
-  if (error) {
-    console.log(error.message);
-  }
-  if (data) {
-    localStorage.setItem("token", JSON.stringify(data.login.token));
-    localStorage.setItem("user", JSON.stringify(data.login));
-
-    history.push("/home");
-  }
+  //   console.log(loading, data, error);
+  //   if (error) {
+  //     console.log(error.message);
+  //   }
 
   return (
     <Flex

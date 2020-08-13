@@ -29,17 +29,20 @@ const Home = () => {
         </Dialog>
       )}
       {posts.map(({ username, body }) => (
-        <View
-          borderWidth="thin"
-          borderColor="dark"
-          borderRadius="medium"
-          width="80%"
-          margin="auto"
-          marginTop="15px"
-        >
-          <Content>{body}</Content>
-          <Text>{username}</Text>
-        </View>
+        <span onClick={() => console.log("clicked")}>
+          <View
+            elementType="div"
+            borderWidth="thin"
+            borderColor="dark"
+            borderRadius="medium"
+            width="80%"
+            margin="auto"
+            marginTop="15px"
+          >
+            <Content>{body}</Content>
+            <Text>{username}</Text>
+          </View>
+        </span>
       ))}
     </View>
   );
