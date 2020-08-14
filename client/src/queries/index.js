@@ -21,6 +21,11 @@ const getPost = gql`
       comments {
         username
         body
+        createdAt
+      }
+      likes {
+        username
+        createdAt
       }
     }
   }
@@ -33,6 +38,26 @@ const createPost = gql`
       body
       id
       createdAt
+    }
+  }
+`;
+
+const createComment = gql`
+  mutation($postId: ID!, $body: String!) {
+    createComment(postId: $postId, body: $body) {
+      username
+      body
+      id
+      createdAt
+      comments {
+        username
+        body
+        createdAt
+      }
+      likes {
+        username
+        createdAt
+      }
     }
   }
 `;
@@ -70,4 +95,4 @@ const register = gql`
   }
 `;
 
-export { login, register, getPosts, getPost, createPost };
+export { login, register, getPosts, getPost, createPost, createComment };

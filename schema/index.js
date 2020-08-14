@@ -226,7 +226,7 @@ const Mutation = new GraphQLObjectType({
         }
         const post = await Post.findById(postId);
         if (post) {
-          post.comment.unshift({
+          post.comments.unshift({
             body,
             username: user.username,
             createdAt: new Date().toISOString(),
