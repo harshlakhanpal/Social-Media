@@ -7,6 +7,16 @@ const getPosts = gql`
       body
       id
       createdAt
+      comments {
+        id
+        username
+        body
+        createdAt
+      }
+      likes {
+        username
+        createdAt
+      }
     }
   }
 `;
@@ -19,6 +29,7 @@ const getPost = gql`
       id
       createdAt
       comments {
+        id
         username
         body
         createdAt
@@ -38,6 +49,16 @@ const createPost = gql`
       body
       id
       createdAt
+      comments {
+        id
+        username
+        body
+        createdAt
+      }
+      likes {
+        username
+        createdAt
+      }
     }
   }
 `;
@@ -50,6 +71,28 @@ const createComment = gql`
       id
       createdAt
       comments {
+        id
+        username
+        body
+        createdAt
+      }
+      likes {
+        username
+        createdAt
+      }
+    }
+  }
+`;
+
+const deleteComment = gql`
+  mutation($postId: ID!, $commentID: ID!) {
+    deleteComment(postId: $postId, commentID: $commentID) {
+      username
+      body
+      id
+      createdAt
+      comments {
+        id
         username
         body
         createdAt
@@ -70,6 +113,7 @@ const likePost = gql`
       id
       createdAt
       comments {
+        id
         username
         body
         createdAt
@@ -127,7 +171,8 @@ export {
   getPosts,
   getPost,
   createPost,
-  createComment,
-  likePost,
   deletePost,
+  createComment,
+  deleteComment,
+  likePost,
 };

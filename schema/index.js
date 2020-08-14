@@ -252,6 +252,7 @@ const Mutation = new GraphQLObjectType({
           const commentIndex = post.comments.findIndex(
             (c) => c.id === commentID
           );
+          console.log(commentIndex);
           if ((post.comments[commentIndex].username = user.username)) {
             post.comments.splice(commentIndex, 1);
             await post.save();

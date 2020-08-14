@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import React, { useState, useEffect } from "react";
+import { useLazyQuery, useMutation } from "@apollo/react-hooks";
 import {
   getPost,
   createComment,
   likePost,
   deletePost,
   getPosts,
+  deleteComment,
 } from "../queries";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
@@ -24,13 +25,14 @@ const Post = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
   let { postId } = useParams();
+  const [commentID, setCommentID] = useState("");
   const [post, setPost] = useState([]);
   const [body, setBody] = useState("");
   const handleBodyChange = (e) => {
     setBody(e.target.value);
   };
 
-  const { loading } = useQuery(getPost, {
+  const [getpost, { loading }] = useLazyQuery(getPost, {
     variables: { postId },
     onCompleted: (data) => {
       console.log(data);
@@ -57,6 +59,7 @@ const Post = () => {
       headers: { authorization: localStorage.getItem("token") },
     },
     onCompleted: (data) => {
+      console.log(data);
       setPost(data.likePost);
     },
     onError: (error) => {
@@ -69,7 +72,7 @@ const Post = () => {
     context: {
       headers: { authorization: localStorage.getItem("token") },
     },
-    refetchQueries: ["getPosts"],
+    //  refetchQueries: ["getPosts"],
     onCompleted: (data) => {
       console.log(data);
       history.push("/home");
@@ -78,11 +81,27 @@ const Post = () => {
       console.log("Error", error);
     },
   });
+  let [commentDelete] = useMutation(deleteComment, {
+    variables: { postId, commentID },
+    context: {
+      headers: { authorization: localStorage.getItem("token") },
+    },
+    onCompleted: (data) => {
+      console.log(data);
+      setPost(data.deleteComment);
+    },
+    onError: (error) => {
+      console.log("Error", error);
+    },
+  });
 
-  console.log(post);
+  useEffect(() => {
+    getpost();
+  }, []);
 
   return (
     <div className="post-page">
+      {loading && "Loadinggg"}
       <div className="post-card">
         {post && (
           <>
@@ -96,7 +115,16 @@ const Post = () => {
             </div>
             {post.comments &&
               post.comments.length > 0 &&
-              post.comments.map(({ body }) => <p>{body}</p>)}
+              post.comments.map(({ body, id }) => (
+                <span
+                  onClick={() => {
+                    setCommentID(id);
+                    commentDelete();
+                  }}
+                >
+                  {body}
+                </span>
+              ))}
           </>
         )}
         Comment:
