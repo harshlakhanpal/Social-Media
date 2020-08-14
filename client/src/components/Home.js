@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 import { useQuery } from "@apollo/react-hooks";
 import { getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
@@ -30,7 +31,7 @@ const Home = () => {
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}
-      {posts.map(({ username, body, id }) => (
+      {posts.map(({ username, body, id, createdAt }) => (
         <View
           elementType="div"
           borderWidth="thin"
@@ -43,6 +44,7 @@ const Home = () => {
           <span onClick={() => history.push(`/home/${id}`)}>
             <Content>{body}</Content>
             <Text>{username}</Text>
+            <Text>{moment(createdAt).fromNow()}</Text>
           </span>
         </View>
       ))}

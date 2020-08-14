@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { getPost } from "../queries";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 import {
   Flex,
   TextField,
@@ -25,7 +26,19 @@ const Post = () => {
   });
   console.log(post);
 
-  return <div>Single Post page</div>;
+  return (
+    <div className="post-page">
+      <div className="post-card">
+        {post && (
+          <>
+            <p>{post.body}</p>
+            <p>{post.username}</p>
+            <p>{moment(post.createdAt).fromNow()}</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Post;
