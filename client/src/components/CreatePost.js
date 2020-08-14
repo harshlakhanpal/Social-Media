@@ -23,10 +23,13 @@ const CreatePost = () => {
     //    const data = proxy.readQuery({
     //      query: getPosts,
     //    });
-    //    data.getPosts = [result.data.getPost, ...data.getPosts];
+    //    console.log(data);
+    //    data.getPosts.push(result.data.createPost);
     //    proxy.writeQuery({ query: getPosts, data });
     //  },
-    pollInterval: 0,
+    //  refetchQueries: ["getPosts"],
+    //  awaitRefetchQueries: true,
+    //  pollInterval: 0,
     onCompleted: () => {
       history.push("/home");
     },

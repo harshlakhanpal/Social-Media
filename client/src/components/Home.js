@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import CreatePost from "./CreatePost";
 import { useQuery } from "@apollo/react-hooks";
 import { getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
@@ -17,13 +18,15 @@ import {
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();
-  const { loading } = useQuery(getPosts, {
+  const { data, loading } = useQuery(getPosts, {
+    fetchPolicy: "no-cache",
     onCompleted: (data) => {
       console.log(data);
       setPosts(data.getPosts);
     },
   });
-  console.log(posts);
+  //   console.log(posts);
+  console.log(data);
   return (
     <View width="100%" height="100%">
       {loading && (
