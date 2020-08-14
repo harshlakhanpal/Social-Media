@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { getPost, createComment } from "../queries";
-import { useParams } from "react-router-dom";
+import {
+  getPost,
+  createComment,
+  likePost,
+  deletePost,
+  getPosts,
+} from "../queries";
+import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 import {
   Flex,
@@ -15,6 +21,8 @@ import {
 } from "@adobe/react-spectrum";
 
 const Post = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const history = useHistory();
   let { postId } = useParams();
   const [post, setPost] = useState([]);
   const [body, setBody] = useState("");
@@ -30,13 +38,41 @@ const Post = () => {
     },
   });
 
-  let [newComment, { called, data, error }] = useMutation(createComment, {
+  let [newComment] = useMutation(createComment, {
     variables: { body, postId },
     context: {
       headers: { authorization: localStorage.getItem("token") },
     },
     onCompleted: (data) => {
       setPost(data.createComment);
+    },
+    onError: (error) => {
+      console.log("Error", error);
+    },
+  });
+
+  let [toggleLike] = useMutation(likePost, {
+    variables: { postId },
+    context: {
+      headers: { authorization: localStorage.getItem("token") },
+    },
+    onCompleted: (data) => {
+      setPost(data.likePost);
+    },
+    onError: (error) => {
+      console.log("Error", error);
+    },
+  });
+
+  let [postDelete] = useMutation(deletePost, {
+    variables: { postId },
+    context: {
+      headers: { authorization: localStorage.getItem("token") },
+    },
+    refetchQueries: ["getPosts"],
+    onCompleted: (data) => {
+      console.log(data);
+      history.push("/home");
     },
     onError: (error) => {
       console.log("Error", error);
@@ -50,9 +86,14 @@ const Post = () => {
       <div className="post-card">
         {post && (
           <>
-            <p>{post.body}</p>
-            <p>{post.username}</p>
-            <p>{moment(post.createdAt).fromNow()}</p>
+            <div onClick={toggleLike}>
+              <p>{post.body}</p>
+              <p>{post.username}</p>
+              <p>{moment(post.createdAt).fromNow()}</p>
+              {user && user.username === post.username && (
+                <span onClick={postDelete}>Delete</span>
+              )}
+            </div>
             {post.comments &&
               post.comments.length > 0 &&
               post.comments.map(({ body }) => <p>{body}</p>)}

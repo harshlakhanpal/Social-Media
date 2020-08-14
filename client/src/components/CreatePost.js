@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { createPost } from "../queries";
+import { createPost, getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
 import {
   Flex,
@@ -19,6 +19,13 @@ const CreatePost = () => {
     context: {
       headers: { authorization: localStorage.getItem("token") },
     },
+    //  update(proxy, result) {
+    //    const data = proxy.readQuery({
+    //      query: getPosts,
+    //    });
+    //    data.getPosts = [result.data.getPost, ...data.getPosts];
+    //    proxy.writeQuery({ query: getPosts, data });
+    //  },
     pollInterval: 0,
     onCompleted: () => {
       history.push("/home");

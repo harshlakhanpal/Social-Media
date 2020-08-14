@@ -62,6 +62,32 @@ const createComment = gql`
   }
 `;
 
+const likePost = gql`
+  mutation($postId: ID!) {
+    likePost(postId: $postId) {
+      username
+      body
+      id
+      createdAt
+      comments {
+        username
+        body
+        createdAt
+      }
+      likes {
+        username
+        createdAt
+      }
+    }
+  }
+`;
+
+const deletePost = gql`
+  mutation($postId: ID!) {
+    deletePost(postId: $postId)
+  }
+`;
+
 const login = gql`
   mutation($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -95,4 +121,13 @@ const register = gql`
   }
 `;
 
-export { login, register, getPosts, getPost, createPost, createComment };
+export {
+  login,
+  register,
+  getPosts,
+  getPost,
+  createPost,
+  createComment,
+  likePost,
+  deletePost,
+};
