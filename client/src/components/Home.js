@@ -28,7 +28,7 @@ const Home = () => {
   //   console.log(posts);
   console.log(data);
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <section className="home">
       {loading && (
         <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
@@ -36,15 +36,13 @@ const Home = () => {
       )}
       {/* <CreatePost /> */}
       {posts.map(({ username, body, id, createdAt }) => (
-        <div className="cards">
-          <span onClick={() => history.push(`/home/${id}`)}>
-            <div>{username} says</div>
-            <div>{body}</div>
-            <Text>{moment(createdAt).fromNow()}</Text>
-          </span>
+        <div className="card" onClick={() => history.push(`/home/${id}`)}>
+          <div className="card-header">{username} says</div>
+          <div className="card-body">{body}</div>
+          <Text>{moment(createdAt).fromNow()}</Text>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 
