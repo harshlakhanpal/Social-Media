@@ -21,14 +21,10 @@ const Landing = () => {
     >
       {" "}
       <h1 className="title">Welcome</h1>
-      <ButtonGroup>
-        <button variant="cta" onClick={() => history.push("/login")}>
-          Login
-        </button>
-        <button variant="cta" onClick={() => history.push("/register")}>
-          Sign up
-        </button>
-      </ButtonGroup>
+      <>
+        <button onClick={() => history.push("/login")}>Login</button>
+        <button onClick={() => history.push("/register")}>Sign up</button>
+      </>
     </div>
   );
 };

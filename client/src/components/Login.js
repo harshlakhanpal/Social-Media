@@ -41,14 +41,7 @@ const Login = () => {
   //   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="login">
       {loading && (
         <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
@@ -56,6 +49,7 @@ const Login = () => {
       )}
       <h1>Login</h1>
       <input
+        className="input"
         name="username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
@@ -63,6 +57,7 @@ const Login = () => {
       />
 
       <input
+        className="input"
         name="password"
         type="password"
         value={password}

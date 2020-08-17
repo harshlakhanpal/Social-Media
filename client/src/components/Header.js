@@ -1,5 +1,4 @@
 import React from "react";
-import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";
 
@@ -11,16 +10,7 @@ const Header = () => {
       : false;
   const dispatch = useDispatch();
   return (
-    <div
-      style={{
-        display: "flex",
-
-        flexBasis: "8%",
-        // justifyContent:{`${checkLoggedIn ? "space-between" : "center"}`},
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
+    <div className="app-header">
       <h2>Social Media</h2>
       {checkLoggedIn && (
         <span onClick={() => dispatch(toggleDrawer())}>My menu</span>

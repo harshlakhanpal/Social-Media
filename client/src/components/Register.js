@@ -27,28 +27,24 @@ const Register = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="register">
       <h1>Register</h1>
       <input
+        className="input"
         label="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Enter your Username"
       />
       <input
+        className="input"
         label="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your Email"
       />
       <input
+        className="input"
         type="password"
         value={password}
         label="Password"
@@ -57,6 +53,7 @@ const Register = () => {
         placeholder="Enter your Password"
       />
       <input
+        className="input"
         type="password"
         name="confirmPassword"
         value={confirmPassword}
