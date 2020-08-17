@@ -87,7 +87,6 @@ const Post = () => {
       headers: { authorization: localStorage.getItem("token") },
     },
     onCompleted: (data) => {
-      console.log(data);
       setPost(data.deleteComment);
     },
     onError: (error) => {
@@ -99,6 +98,7 @@ const Post = () => {
     getpost();
   }, []);
 
+  console.log(commentID);
   return (
     <div className="post-page">
       {loading && "Loadinggg"}
@@ -117,8 +117,8 @@ const Post = () => {
               post.comments.length > 0 &&
               post.comments.map(({ body, id }) => (
                 <span
-                  onClick={() => {
-                    setCommentID(id);
+                  onClick={async () => {
+                    await setCommentID(id);
                     commentDelete();
                   }}
                 >
