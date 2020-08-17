@@ -43,6 +43,7 @@ const Login = () => {
   return (
     <div
       style={{
+        display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
@@ -54,34 +55,24 @@ const Login = () => {
         </Dialog>
       )}
       <h1>Login</h1>
-      <TextField
-        label="Username"
+      <input
         name="username"
         value={username}
-        onChange={setUsername}
+        onChange={(e) => setUsername(e.target.value)}
         placeholder="Enter your username"
       />
 
-      <TextField
-        label="Password"
+      <input
         name="password"
         type="password"
         value={password}
         //   onPressEnter={handleLogin}
-        onChange={setPassword}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="Enter your password"
       />
       <br />
 
-      <button
-        className="input"
-        type="primary"
-        onClick={userLogin}
-        //   loading={loading}
-        //   disabled={!username.length || !password.length}
-      >
-        Login
-      </button>
+      <button onClick={userLogin}>Login</button>
       <br />
     </div>
   );

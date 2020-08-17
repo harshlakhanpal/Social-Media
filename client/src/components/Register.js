@@ -29,46 +29,45 @@ const Register = () => {
   return (
     <div
       style={{
+        display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
       <h1>Register</h1>
-      <TextField
+      <input
         label="Username"
         value={username}
-        onChange={setUsername}
+        onChange={(e) => setUsername(e.target.value)}
         placeholder="Enter your Username"
       />
-      <TextField
+      <input
         label="Email"
         value={email}
-        onChange={setEmail}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your Email"
       />
-      <TextField
+      <input
         type="password"
         value={password}
         label="Password"
         //   onPressEnter={handleLogin}
-        onChange={setPassword}
+        onChange={(e) => setPassword(e.target.value)}
         placeholder="Enter your Password"
       />
-      <TextField
+      <input
         type="password"
         name="confirmPassword"
         value={confirmPassword}
         label="Confirm Password"
         //   onPressEnter={handleLogin}
-        onChange={setConfirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
         placeholder="Confirm your password"
       />
       <br />
 
       <button
-        className="input"
-        type="primary"
         onClick={userRegistration}
         //   loading={loading}
         //   disabled={!username.length || !password.length}

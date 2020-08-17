@@ -7,8 +7,21 @@ import {
   deletePost,
   deleteComment,
 } from "../queries";
+import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
+
+const Postcard = styled.div`
+  background: yellow;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 80%;
+  .header {
+    flex-basis: 10%;
+    background: purple;
+  }
+`;
 
 const Post = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -91,16 +104,19 @@ const Post = () => {
   return (
     <div className="post-page">
       {loading && "Loadinggg"}
-      <div className="post-card">
+      <Postcard className="post-card neumorphic">
         {post && (
           <>
-            <div onClick={toggleLike}>
-              <p>{post.username} says </p>
-              <p>{post.body}</p>
+            <div>
+              <div className="header">{post.username} says </div>
+              <div className="content">{post.body}</div>
               <p>{moment(post.createdAt).fromNow()}</p>
               {user && user.username === post.username && (
                 <span onClick={postDelete}>Delete</span>
               )}
+              <div className="like" onClick={toggleLike}>
+                like
+              </div>
             </div>
             {post.comments &&
               post.comments.length > 0 &&
@@ -125,7 +141,7 @@ const Post = () => {
           onChange={handleBodyChange}
         ></textarea>
         <button onClick={newComment}>comment</button>
-      </div>
+      </Postcard>
     </div>
   );
 };

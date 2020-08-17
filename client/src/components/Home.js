@@ -36,19 +36,10 @@ const Home = () => {
       )}
       {/* <CreatePost /> */}
       {posts.map(({ username, body, id, createdAt }) => (
-        <div
-          style={{
-            borderWidth: "1px",
-            borderColor: "black",
-            borderRadius: "20px",
-            width: "80%",
-            margin: "auto",
-            marginTop: "15px",
-          }}
-        >
+        <div className="cards">
           <span onClick={() => history.push(`/home/${id}`)}>
-            <Content>{body}</Content>
-            <Text>{username}</Text>
+            <div>{username} says</div>
+            <div>{body}</div>
             <Text>{moment(createdAt).fromNow()}</Text>
           </span>
         </div>
