@@ -4,13 +4,13 @@ import { IllustratedMessage, Heading, Content } from "@adobe/react-spectrum";
 import NotFound from "@spectrum-icons/illustrations/NotFound";
 
 const PageNotFound = () => (
-  <IllustratedMessage>
+  <div>
     <NotFound />
-    <Heading>Error 404: Page not found</Heading>
-    <Content>
+    <h1>Error 404: Page not found</h1>
+    <p>
       This page isn't available. Try checking the URL or visit a different page.
-    </Content>
-  </IllustratedMessage>
+    </p>
+  </div>
 );
 
 export default PageNotFound;

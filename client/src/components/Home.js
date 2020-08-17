@@ -39,8 +39,8 @@ const Home = () => {
         <div
           style={{
             borderWidth: "1px",
-            borderColor: "dark",
-            borderRadius: "medium",
+            borderColor: "black",
+            borderRadius: "20px",
             width: "80%",
             margin: "auto",
             marginTop: "15px",

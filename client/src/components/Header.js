@@ -23,9 +23,7 @@ const Header = () => {
     >
       <h2>Social Media</h2>
       {checkLoggedIn && (
-        <span onClick={() => dispatch(toggleDrawer())}>
-          <ShowMenu aria-label="showmenu" size="S" />
-        </span>
+        <span onClick={() => dispatch(toggleDrawer())}>My menu</span>
       )}
     </div>
   );

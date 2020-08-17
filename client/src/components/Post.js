@@ -5,21 +5,10 @@ import {
   createComment,
   likePost,
   deletePost,
-  getPosts,
   deleteComment,
 } from "../queries";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
-import {
-  Flex,
-  TextField,
-  Heading,
-  Text,
-  Content,
-  View,
-  Dialog,
-  ProgressCircle,
-} from "@adobe/react-spectrum";
 
 const Post = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -106,8 +95,8 @@ const Post = () => {
         {post && (
           <>
             <div onClick={toggleLike}>
+              <p>{post.username} says </p>
               <p>{post.body}</p>
-              <p>{post.username}</p>
               <p>{moment(post.createdAt).fromNow()}</p>
               {user && user.username === post.username && (
                 <span onClick={postDelete}>Delete</span>

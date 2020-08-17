@@ -1,6 +1,6 @@
 import React from "react";
-// import "./App.scss";
-import { Provider, defaultTheme, Flex } from "@adobe/react-spectrum";
+import "./App.scss";
+// import { Provider, defaultTheme, Flex } from "@adobe/react-spectrum";
 import Landing from "./components/Landing";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -15,7 +15,7 @@ import CreatePost from "./components/CreatePost";
 
 const App = () => {
   return (
-    <Provider theme={defaultTheme} UNSAFE_style={{ background: "transparent" }}>
+    <>
       <div
         style={{
           display: "flex",
@@ -53,7 +53,7 @@ const App = () => {
           </Switch>
         </div>
       </div>
-    </Provider>
+    </>
   );
 };
 
