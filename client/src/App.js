@@ -16,17 +16,27 @@ import CreatePost from "./components/CreatePost";
 const App = () => {
   return (
     <Provider theme={defaultTheme} UNSAFE_style={{ background: "transparent" }}>
-      <Flex
-        direction="column"
-        width="100%"
-        minHeight="100%"
-        height="96vh"
-        position="relative"
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          minHeight: "100%",
+          height: "96vh",
+          position: "relative",
+        }}
       >
         <Header />
         <Drawer />
 
-        <Flex height="100%" alignItems="center" justifyContent="center">
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
@@ -41,8 +51,8 @@ const App = () => {
 
             <PageNotFound />
           </Switch>
-        </Flex>
-      </Flex>
+        </div>
+      </div>
     </Provider>
   );
 };

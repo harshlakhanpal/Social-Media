@@ -27,13 +27,14 @@ const Register = () => {
   };
 
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      gap="size-25"
+    <div
+      style={{
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <Heading level="1">Register</Heading>
+      <h1>Register</h1>
       <TextField
         label="Username"
         value={username}
@@ -75,7 +76,7 @@ const Register = () => {
         Register
       </button>
       <br />
-    </Flex>
+    </div>
   );
 };
 

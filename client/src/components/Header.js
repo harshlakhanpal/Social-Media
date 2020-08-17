@@ -1,5 +1,4 @@
 import React from "react";
-import { Flex, Heading } from "@adobe/react-spectrum";
 import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";
@@ -12,18 +11,23 @@ const Header = () => {
       : false;
   const dispatch = useDispatch();
   return (
-    <Flex
-      flexBasis="8%"
-      justifyContent={`${checkLoggedIn ? "space-between" : "center"}`}
-      alignItems="center"
+    <div
+      style={{
+        display: "flex",
+
+        flexBasis: "8%",
+        // justifyContent:{`${checkLoggedIn ? "space-between" : "center"}`},
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
     >
-      <Heading level="1">Social Media</Heading>
+      <h2>Social Media</h2>
       {checkLoggedIn && (
         <span onClick={() => dispatch(toggleDrawer())}>
           <ShowMenu aria-label="showmenu" size="S" />
         </span>
       )}
-    </Flex>
+    </div>
   );
 };
 export default Header;

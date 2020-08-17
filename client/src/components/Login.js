@@ -41,19 +41,19 @@ const Login = () => {
   //   }
 
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      gap="size-50"
-      UNSAFE_className="neumorphic"
+    <div
+      style={{
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       {loading && (
         <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}
-      <Heading level="1">Login</Heading>
+      <h1>Login</h1>
       <TextField
         label="Username"
         name="username"
@@ -83,7 +83,7 @@ const Login = () => {
         Login
       </button>
       <br />
-    </Flex>
+    </div>
   );
 };
 

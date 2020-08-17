@@ -28,30 +28,32 @@ const Home = () => {
   //   console.log(posts);
   console.log(data);
   return (
-    <View width="100%" height="100%">
+    <div style={{ width: "100%", height: "100%" }}>
       {loading && (
         <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}
+      {/* <CreatePost /> */}
       {posts.map(({ username, body, id, createdAt }) => (
-        <View
-          elementType="div"
-          borderWidth="thin"
-          borderColor="dark"
-          borderRadius="medium"
-          width="80%"
-          margin="auto"
-          marginTop="15px"
+        <div
+          style={{
+            borderWidth: "1px",
+            borderColor: "dark",
+            borderRadius: "medium",
+            width: "80%",
+            margin: "auto",
+            marginTop: "15px",
+          }}
         >
           <span onClick={() => history.push(`/home/${id}`)}>
             <Content>{body}</Content>
             <Text>{username}</Text>
             <Text>{moment(createdAt).fromNow()}</Text>
           </span>
-        </View>
+        </div>
       ))}
-    </View>
+    </div>
   );
 };
 
