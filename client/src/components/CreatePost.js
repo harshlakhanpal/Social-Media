@@ -38,34 +38,24 @@ const CreatePost = () => {
     },
   });
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      gap="size-50"
-      alignSelf="flex-start"
-      UNSAFE_className="neumorphic"
-    >
+    <div>
       {loading && (
         <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}
-      <Heading level="4">Share your thoughts with us.</Heading>
-      <TextArea
-        width="100%"
-        //   height="150px"
-        label=""
+      <h1>Share your thoughts with us.</h1>
+      <textarea
+        className="input"
+        rows="5"
         name="Body"
         value={body}
-        onChange={setBody}
+        onChange={(e) => setBody(e.target.value)}
         placeholder="Let us know what's on your mind "
       />
-      <Button variant="cta" onClick={newPost}>
-        Share
-      </Button>
+      <button onClick={newPost}>Share</button>
       <br />
-    </Flex>
+    </div>
   );
 };
 

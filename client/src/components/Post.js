@@ -11,18 +11,6 @@ import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
 
-const Postcard = styled.div`
-  background: yellow;
-  display: flex;
-  flex-direction: column;
-  height: 400px;
-  width: 80%;
-  .header {
-    flex-basis: 10%;
-    background: purple;
-  }
-`;
-
 const Post = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
@@ -102,47 +90,67 @@ const Post = () => {
 
   console.log(commentID);
   return (
-    <div className="post-page">
+    <section className="post-page">
       {loading && "Loadinggg"}
-      <Postcard className="post-card neumorphic">
+      <div>
         {post && (
           <>
-            <div>
-              <div className="header">{post.username} says </div>
+            <div className="card">
               <div className="content">{post.body}</div>
-              <p>{moment(post.createdAt).fromNow()}</p>
-              {user && user.username === post.username && (
-                <span onClick={postDelete}>Delete</span>
-              )}
-              <div className="like" onClick={toggleLike}>
-                like
+              <div className="actions">
+                {user && user.username === post.username && (
+                  <span onClick={postDelete}>Del</span>
+                )}
+                <span className="like" onClick={toggleLike}>
+                  Like
+                </span>
+                <p>{moment(post.createdAt).format("DD-MM-YY")}</p>
               </div>
+            </div>
+            <p style={{ textAlign: "end" }}>Posted by {post.username}</p>
+            <div style={{ position: "relative" }}>
+              <textarea
+                className="input"
+                //   style={{ position: "relative" }}
+                rows="2"
+                placeholder="Comment here."
+                value={body}
+                onChange={handleBodyChange}
+              ></textarea>
+              <button
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  right: "0",
+                }}
+                //  className="input"
+                onClick={newComment}
+              >
+                comment
+              </button>
             </div>
             {post.comments &&
               post.comments.length > 0 &&
-              post.comments.map(({ body, id }) => (
-                <span
-                  onClick={async () => {
-                    await setCommentID(id);
-                    commentDelete();
-                  }}
-                >
-                  {body}
-                </span>
+              post.comments.map(({ body, id, username }) => (
+                <div className="comment">
+                  <span style={{ wordBreak: "break-all" }}>{body}</span>
+                  {user && user.username === username && (
+                    <span
+                      style={{ alignSelf: "flex-end" }}
+                      onClick={async () => {
+                        await setCommentID(id);
+                        commentDelete();
+                      }}
+                    >
+                      Del
+                    </span>
+                  )}
+                </div>
               ))}
           </>
         )}
-        Comment:
-        <textarea
-          rows="10"
-          className="shadow"
-          placeholder=""
-          value={body}
-          onChange={handleBodyChange}
-        ></textarea>
-        <button onClick={newComment}>comment</button>
-      </Postcard>
-    </div>
+      </div>
+    </section>
   );
 };
 
