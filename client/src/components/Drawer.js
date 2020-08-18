@@ -4,6 +4,7 @@ import ArrowRight from "@spectrum-icons/workflow/ArrowRight";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";
+import rightArrow from "../assets/icons/right-arrow.svg";
 
 const DrawerContainer = styled.div`
   position: absolute;
@@ -31,8 +32,11 @@ const Drawer = () => {
       {visible ? (
         <DrawerContainer>
           <div>
-            <span onClick={() => dispatch(toggleDrawer())}>
-              <ArrowRight aria-label="ArrowRight" size="S" width="100%" />
+            <span
+              style={{ width: "100%", textAlign: "center" }}
+              onClick={() => dispatch(toggleDrawer())}
+            >
+              <img src={rightArrow} alt="hide sidebar" className="icon" />
             </span>
 
             <div onClick={() => history.push("/home/create_post")}>Option1</div>

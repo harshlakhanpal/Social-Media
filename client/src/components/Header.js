@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";
+import menu from "../assets/icons/bars-solid.svg";
 
 const Header = () => {
   const loggedIn = useSelector((state) => state.app.user);
@@ -13,7 +14,9 @@ const Header = () => {
     <div className="app-header">
       <h2>Social Media</h2>
       {checkLoggedIn && (
-        <span onClick={() => dispatch(toggleDrawer())}>My menu</span>
+        <span onClick={() => dispatch(toggleDrawer())}>
+          <img src={menu} alt="logo" className="icon" />
+        </span>
       )}
     </div>
   );

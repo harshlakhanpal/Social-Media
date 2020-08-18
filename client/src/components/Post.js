@@ -108,25 +108,21 @@ const Post = () => {
               </div>
             </div>
             <p style={{ textAlign: "end" }}>Posted by {post.username}</p>
-            <div style={{ position: "relative" }}>
+            <div className="textarea-container">
               <textarea
                 className="input"
-                //   style={{ position: "relative" }}
+                style={{ marginBottom: "0" }}
                 rows="2"
                 placeholder="Comment here."
                 value={body}
                 onChange={handleBodyChange}
               ></textarea>
               <button
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  right: "0",
-                }}
+                className="comment-btn"
                 //  className="input"
                 onClick={newComment}
               >
-                comment
+                Comment
               </button>
             </div>
             {post.comments &&

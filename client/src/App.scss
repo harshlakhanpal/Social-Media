@@ -132,6 +132,21 @@
   }
 }
 
+.textarea-container {
+  display: flex;
+  flex-direction: column;
+  .comment-btn {
+    width: 20%;
+    align-self: center;
+  }
+}
+.icon {
+  height: 1.4rem;
+  width: 1.4rem;
+  cursor: pointer;
+  fill: blue;
+}
+
 .loader-container {
   position: relative;
   height: 100%;
