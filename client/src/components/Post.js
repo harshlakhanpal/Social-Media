@@ -34,6 +34,7 @@ const Post = () => {
       console.log(data);
 
       await setPost(data.getPost);
+      await setPostLikes(data.getPost.likes);
       await setLikeCount(data.getPost.likes.length);
     },
   });

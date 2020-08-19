@@ -13,11 +13,11 @@ const Header = () => {
   return (
     <div className="app-header">
       <h2>Social Media</h2>
-      {checkLoggedIn && (
+      {/* {checkLoggedIn && (
         <span onClick={() => dispatch(toggleDrawer())}>
           <img src={menu} alt="logo" className="icon" />
         </span>
-      )}
+      )} */}
     </div>
   );
 };
