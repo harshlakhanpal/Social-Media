@@ -14,6 +14,7 @@ import filledHeart from "../assets/icons/heart-filled.svg";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
+import Loader from "./Loader";
 
 const Post = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -44,8 +45,9 @@ const Post = () => {
     context: {
       headers: { authorization: localStorage.getItem("token") },
     },
-    onCompleted: (data) => {
-      setPost(data.createComment);
+    onCompleted: async (data) => {
+      await setPost(data.createComment);
+      await setBody("");
     },
     onError: (error) => {
       console.log("Error", error);
@@ -102,7 +104,7 @@ const Post = () => {
   console.log(commentID);
   return (
     <section className="post-page">
-      {loading && "Loadinggg"}
+      {loading && <Loader />}
       <div>
         {post && (
           <>

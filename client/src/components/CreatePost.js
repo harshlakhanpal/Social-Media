@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { createPost, getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
+import Loader from "./Loader";
 
 const CreatePost = () => {
   const history = useHistory();
@@ -31,7 +32,7 @@ const CreatePost = () => {
   });
   return (
     <div className="create-post">
-      {loading && <p>Loadinggg</p>}
+      {loading && <Loader />}
       <h1>Share your thoughts with us</h1>
       <textarea
         className="input"

@@ -6,6 +6,7 @@ import { getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
 
 import viewArrow from "../assets/icons/view-arrow.svg";
+import Loader from "./Loader";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();
@@ -20,7 +21,7 @@ const Home = () => {
 
   return (
     <section className="home">
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
       {/* <CreatePost /> */}
       {posts.map(({ username, body, id, createdAt }) => (
         <div className="card">
