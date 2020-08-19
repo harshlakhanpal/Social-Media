@@ -7,6 +7,7 @@ import {
   deletePost,
   deleteComment,
 } from "../queries";
+import del from "../assets/icons/delete.svg";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
@@ -96,15 +97,19 @@ const Post = () => {
         {post && (
           <>
             <div className="card">
-              <div className="content">{post.body}</div>
+              <div className="card-content">
+                <p>{post.body}</p>
+                <p>{moment(post.createdAt).format("DD-MM-YY")}</p>
+              </div>
               <div className="actions">
                 {user && user.username === post.username && (
-                  <span onClick={postDelete}>Del</span>
+                  <span onClick={postDelete}>
+                    <img src={del} alt="Delete Post" className="icon" />
+                  </span>
                 )}
                 <span className="like" onClick={toggleLike}>
                   Like
                 </span>
-                <p>{moment(post.createdAt).format("DD-MM-YY")}</p>
               </div>
             </div>
             <p style={{ textAlign: "end" }}>Posted by {post.username}</p>

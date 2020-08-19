@@ -12,7 +12,7 @@ const DrawerContainer = styled.div`
   right: 0;
   width: 30%;
   height: 100%;
-  background: lightgrey;
+  background: #4265e2;
   z-index: 100;
   div {
     width: 100%;
