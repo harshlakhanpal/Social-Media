@@ -39,7 +39,13 @@ const Home = () => {
         <div className="card">
           <div className="info">
             <p style={{ fontSize: "2rem", padding: "1.3rem" }}>{body}</p>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "1rem",
+              }}
+            >
               <p>{username}</p>
               <p>{moment(createdAt).fromNow()}</p>
             </div>

@@ -107,14 +107,16 @@ const Post = () => {
           <>
             <div className="card">
               <div className="card-content">
-                <div style={{ fontSize: "2.5rem" }}>{post.body}</div>
+                <div style={{ fontSize: "2rem" }}>{post.body}</div>
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingTop: "1rem",
+                  }}
                 >
                   <p style={{ textAlign: "end" }}>
-                    {`Posted by ${post.username} ${moment(
-                      post.createdAt
-                    ).fromNow()}`}
+                    {`Posted by ${post.username}`}
                   </p>
                   <p>
                     {likeCount === 0 || likeCount > 1

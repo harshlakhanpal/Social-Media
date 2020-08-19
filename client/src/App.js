@@ -10,6 +10,7 @@ import Post from "./components/Post";
 import PageNotFound from "./components/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { Switch, Route } from "react-router-dom";
 import CreatePost from "./components/CreatePost";
 
@@ -31,6 +32,7 @@ const App = () => {
           <PageNotFound />
         </Switch>
       </div>
+      <Footer />
     </div>
   );
 };
