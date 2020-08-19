@@ -39,7 +39,9 @@ const Drawer = () => {
               <img src={rightArrow} alt="hide sidebar" className="icon" />
             </span>
 
-            <div onClick={() => history.push("/home/create_post")}>Option1</div>
+            <div onClick={() => history.replace("/home/create_post")}>
+              Option1
+            </div>
             <div>Option2</div>
             <div>Option3</div>
           </div>
