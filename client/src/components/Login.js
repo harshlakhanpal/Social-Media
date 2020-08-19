@@ -4,14 +4,8 @@ import { login } from "../queries";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login as loginAction } from "../store/app/actions";
-import {
-  Flex,
-  TextField,
-  Heading,
-  ProgressCircle,
-  Dialog,
-} from "@adobe/react-spectrum";
-// import Loader from "./Loader";
+
+import Loader from "./Loader";
 
 const Login = () => {
   const history = useHistory();
@@ -42,11 +36,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      {loading && (
-        <Dialog position="fixed" top="45%" left="45%" zIndex="101">
-          <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
-        </Dialog>
-      )}
+      {loading && <Loader />}
       <h1>Login</h1>
       <input
         className="input"

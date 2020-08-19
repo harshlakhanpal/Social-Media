@@ -4,16 +4,7 @@ import CreatePost from "./CreatePost";
 import { useQuery } from "@apollo/react-hooks";
 import { getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
-import {
-  Flex,
-  TextField,
-  Heading,
-  Text,
-  Content,
-  View,
-  Dialog,
-  ProgressCircle,
-} from "@adobe/react-spectrum";
+
 import viewArrow from "../assets/icons/view-arrow.svg";
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -29,11 +20,7 @@ const Home = () => {
 
   return (
     <section className="home">
-      {loading && (
-        <Dialog position="fixed" top="45%" left="45%" zIndex="101">
-          <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
-        </Dialog>
-      )}
+      {loading && <p>Loading...</p>}
       {/* <CreatePost /> */}
       {posts.map(({ username, body, id, createdAt }) => (
         <div className="card">

@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { createPost, getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
-import {
-  Flex,
-  TextArea,
-  Heading,
-  ProgressCircle,
-  Dialog,
-  Button,
-} from "@adobe/react-spectrum";
 
 const CreatePost = () => {
   const history = useHistory();
@@ -39,11 +31,7 @@ const CreatePost = () => {
   });
   return (
     <div className="create-post">
-      {loading && (
-        <Dialog position="fixed" top="45%" left="45%" zIndex="101">
-          <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
-        </Dialog>
-      )}
+      {loading && <p>Loadinggg</p>}
       <h1>Share your thoughts with us</h1>
       <textarea
         className="input"
