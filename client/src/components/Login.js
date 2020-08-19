@@ -66,8 +66,14 @@ const Login = () => {
         placeholder="Enter your password"
       />
       <br />
+      <span onClick={() => history.push("/register")} className="link">
+        Not a member? Register here.
+      </span>
+      <br />
 
-      <button onClick={userLogin}>Login</button>
+      <button className="btn" onClick={userLogin}>
+        Login
+      </button>
       <br />
     </div>
   );

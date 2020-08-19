@@ -63,8 +63,12 @@ const Register = () => {
         placeholder="Confirm your password"
       />
       <br />
-
+      <span onClick={() => history.push("/login")} className="link">
+        Already a member? Login.
+      </span>
+      <br />
       <button
+        className="btn"
         onClick={userRegistration}
         //   loading={loading}
         //   disabled={!username.length || !password.length}
