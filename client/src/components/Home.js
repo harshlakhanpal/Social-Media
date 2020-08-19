@@ -14,7 +14,7 @@ import {
   Dialog,
   ProgressCircle,
 } from "@adobe/react-spectrum";
-
+import viewArrow from "../assets/icons/view-arrow.svg";
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const history = useHistory();
@@ -36,10 +36,15 @@ const Home = () => {
       )}
       {/* <CreatePost /> */}
       {posts.map(({ username, body, id, createdAt }) => (
-        <div className="card" onClick={() => history.push(`/home/${id}`)}>
-          <div className="card-header">{username} says</div>
-          <div className="card-body">{body}</div>
-          <Text>{moment(createdAt).fromNow()}</Text>
+        <div className="card">
+          <div className="info">
+            <p>{username} says</p>
+            <p>{body}</p>
+            <p>{moment(createdAt).fromNow()}</p>
+          </div>
+          <div className="action" onClick={() => history.push(`/home/${id}`)}>
+            <img src={viewArrow} alt="View post" className="icon" />
+          </div>
         </div>
       ))}
     </section>
