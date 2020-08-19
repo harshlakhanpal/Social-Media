@@ -38,7 +38,7 @@ const Home = () => {
       {posts.map(({ username, body, id, createdAt }) => (
         <div className="card">
           <div className="info">
-            <p style={{ fontSize: "2rem" }}>{body}</p>
+            <p style={{ fontSize: "2rem", padding: "1.3rem" }}>{body}</p>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <p>{username}</p>
               <p>{moment(createdAt).fromNow()}</p>

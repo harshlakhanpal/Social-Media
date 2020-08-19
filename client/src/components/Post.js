@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLazyQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import {
   getPost,
   createComment,
@@ -28,7 +28,7 @@ const Post = () => {
     setBody(e.target.value);
   };
 
-  const [getpost, { loading }] = useLazyQuery(getPost, {
+  const { loading } = useQuery(getPost, {
     variables: { postId },
     onCompleted: async (data) => {
       console.log(data);
@@ -94,9 +94,9 @@ const Post = () => {
     },
   });
 
-  useEffect(() => {
-    getpost();
-  }, []);
+  //   useEffect(() => {
+  //     getpost();
+  //   }, []);
 
   console.log(commentID);
   return (
