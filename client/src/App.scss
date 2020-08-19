@@ -182,19 +182,17 @@
 }
 
 .loader-container {
-  position: relative;
-  height: 100%;
+  position: absolute;
+  height: 92%;
   width: 100%;
   left: 0;
-  top: 0;
+  top: 8%;
   background: rgba($color: #fff, $alpha: 0.3);
   z-index: 1000;
   .loader {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    height: 36px;
-    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
