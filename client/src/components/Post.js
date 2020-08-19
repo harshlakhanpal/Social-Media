@@ -108,7 +108,7 @@ const Post = () => {
           <>
             <div className="card">
               <div className="card-content">
-                <div style={{ fontSize: "2rem" }}>{post.body}</div>
+                <div style={{ fontSize: "1.65rem" }}>{post.body}</div>
                 <div
                   style={{
                     display: "flex",

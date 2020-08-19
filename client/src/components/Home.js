@@ -38,7 +38,7 @@ const Home = () => {
       {posts.map(({ username, body, id, createdAt }) => (
         <div className="card">
           <div className="info">
-            <p style={{ fontSize: "2rem", padding: "1.3rem" }}>{body}</p>
+            <p style={{ fontSize: "1.65rem", padding: "1.3rem" }}>{body}</p>
             <div
               style={{
                 display: "flex",
