@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Button,
-  Heading,
-  ButtonGroup,
-  Flex,
-} from "@adobe/react-spectrum";
+
 import { useHistory } from "react-router-dom";
 
 const Landing = () => {

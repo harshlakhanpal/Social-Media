@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ArrowRight from "@spectrum-icons/workflow/ArrowRight";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../store/app/actions";

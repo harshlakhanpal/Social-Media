@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { graphql } from "react-apollo";
-import { useLazyQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 // import * as compose from "lodash.flowright";
-import Loader from "./Loader";
+
 import { register } from "../queries";
 import { useHistory } from "react-router-dom";
-import { Flex, TextField, Heading } from "@adobe/react-spectrum";
 
 const Register = () => {
   const history = useHistory();

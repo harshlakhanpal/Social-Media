@@ -11,9 +11,7 @@ import del from "../assets/icons/delete.svg";
 import emptyHeart from "../assets/icons/heart.svg";
 import filledHeart from "../assets/icons/heart-filled.svg";
 
-import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-import moment from "moment";
 import Loader from "./Loader";
 
 const Post = () => {
