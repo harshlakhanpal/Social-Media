@@ -38,23 +38,25 @@ const CreatePost = () => {
     },
   });
   return (
-    <div>
+    <div className="create-post">
       {loading && (
         <Dialog position="fixed" top="45%" left="45%" zIndex="101">
           <ProgressCircle size="L" aria-label="Loading…" isIndeterminate />
         </Dialog>
       )}
-      <h1>Share your thoughts with us.</h1>
+      <h1>Share your thoughts with us</h1>
       <textarea
         className="input"
+        style={{ marginBottom: "0" }}
         rows="5"
         name="Body"
         value={body}
         onChange={(e) => setBody(e.target.value)}
         placeholder="Let us know what's on your mind "
       />
-      <button onClick={newPost}>Share</button>
-      <br />
+      <button className="btn" onClick={newPost}>
+        Share
+      </button>
     </div>
   );
 };

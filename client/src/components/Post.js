@@ -8,6 +8,9 @@ import {
   deleteComment,
 } from "../queries";
 import del from "../assets/icons/delete.svg";
+import emptyHeart from "../assets/icons/heart.svg";
+import filledHeart from "../assets/icons/heart-filled.svg";
+
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import moment from "moment";
@@ -16,8 +19,10 @@ const Post = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
   let { postId } = useParams();
+  const [likeCount, setLikeCount] = useState(0);
+  const [postLikes, setPostLikes] = useState([]);
   const [commentID, setCommentID] = useState("");
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState({});
   const [body, setBody] = useState("");
   const handleBodyChange = (e) => {
     setBody(e.target.value);
@@ -25,9 +30,11 @@ const Post = () => {
 
   const [getpost, { loading }] = useLazyQuery(getPost, {
     variables: { postId },
-    onCompleted: (data) => {
+    onCompleted: async (data) => {
       console.log(data);
-      setPost(data.getPost);
+
+      await setPost(data.getPost);
+      await setLikeCount(data.getPost.likes.length);
     },
   });
 
@@ -49,8 +56,10 @@ const Post = () => {
     context: {
       headers: { authorization: localStorage.getItem("token") },
     },
-    onCompleted: (data) => {
+    onCompleted: async (data) => {
       console.log(data);
+      await setLikeCount(data.likePost.likes.length);
+      await setPostLikes(data.likePost.likes);
       setPost(data.likePost);
     },
     onError: (error) => {
@@ -98,8 +107,21 @@ const Post = () => {
           <>
             <div className="card">
               <div className="card-content">
-                <p>{post.body}</p>
-                <p>{moment(post.createdAt).format("DD-MM-YY")}</p>
+                <div style={{ fontSize: "2.5rem" }}>{post.body}</div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <p style={{ textAlign: "end" }}>
+                    {`Posted by ${post.username} ${moment(
+                      post.createdAt
+                    ).fromNow()}`}
+                  </p>
+                  <p>
+                    {likeCount === 0 || likeCount > 1
+                      ? `Liked by ${likeCount} users.`
+                      : `Liked by ${likeCount} user.`}
+                  </p>
+                </div>
               </div>
               <div className="actions">
                 {user && user.username === post.username && (
@@ -108,25 +130,33 @@ const Post = () => {
                   </span>
                 )}
                 <span className="like" onClick={toggleLike}>
-                  Like
+                  {true &&
+                  postLikes.some((one) => one.username === user.username) ? (
+                    <img
+                      src={filledHeart}
+                      alt="Like/Unlike Post"
+                      className="icon"
+                    />
+                  ) : (
+                    <img
+                      src={emptyHeart}
+                      alt="Like/Unlike Post"
+                      className="icon"
+                    />
+                  )}
                 </span>
               </div>
             </div>
-            <p style={{ textAlign: "end" }}>Posted by {post.username}</p>
             <div className="textarea-container">
               <textarea
                 className="input"
                 style={{ marginBottom: "0" }}
-                rows="2"
+                rows="4"
                 placeholder="Comment here."
                 value={body}
                 onChange={handleBodyChange}
               ></textarea>
-              <button
-                className="comment-btn"
-                //  className="input"
-                onClick={newComment}
-              >
+              <button className="btn" onClick={newComment}>
                 Comment
               </button>
             </div>
@@ -143,7 +173,7 @@ const Post = () => {
                         commentDelete();
                       }}
                     >
-                      Del
+                      <img src={del} alt="Delete comment" className="icon" />
                     </span>
                   )}
                 </div>

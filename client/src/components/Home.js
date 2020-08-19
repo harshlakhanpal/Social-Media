@@ -26,7 +26,7 @@ const Home = () => {
     },
   });
   //   console.log(posts);
-  console.log(data);
+
   return (
     <section className="home">
       {loading && (
@@ -38,9 +38,11 @@ const Home = () => {
       {posts.map(({ username, body, id, createdAt }) => (
         <div className="card">
           <div className="info">
-            <p>{username} says</p>
-            <p>{body}</p>
-            <p>{moment(createdAt).fromNow()}</p>
+            <p style={{ fontSize: "2rem" }}>{body}</p>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <p>{username}</p>
+              <p>{moment(createdAt).fromNow()}</p>
+            </div>
           </div>
           <div className="action" onClick={() => history.push(`/home/${id}`)}>
             <img src={viewArrow} alt="View post" className="icon" />
