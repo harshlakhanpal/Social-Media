@@ -67,7 +67,7 @@ const Post = () => {
       });
     },
     onError: (error) => {
-      toast.success("Post created successfully", {
+      toast.error("Please try again", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: true,
@@ -101,7 +101,14 @@ const Post = () => {
     },
     //  refetchQueries: ["getPosts"],
     onCompleted: (data) => {
-      console.log(data);
+      toast.success("Post deleted successfully", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
       history.push("/home");
     },
     onError: (error) => {
@@ -113,8 +120,16 @@ const Post = () => {
     context: {
       headers: { authorization: localStorage.getItem("token") },
     },
-    onCompleted: (data) => {
-      setPost(data.deleteComment);
+    onCompleted: async (data) => {
+      await setPost(data.deleteComment);
+      toast.success("Comment deleted successfully", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
     onError: (error) => {
       console.log("Error", error);
