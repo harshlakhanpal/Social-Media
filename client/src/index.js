@@ -13,7 +13,7 @@ import App from "./App";
 
 const cache = new InMemoryCache({ addTypename: false });
 const client = new ApolloClient({
-  uri: "/graphql",
+  uri: "http://localhost:5000/graphql",
   cache,
 });
 

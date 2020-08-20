@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDrawer } from "../store/app/actions";
-import menu from "../assets/icons/bars-solid.svg";
+import { logout } from "../store/app/actions";
+import logouticon from "../assets/icons/logout.svg";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
+  const history = useHistory();
   const loggedIn = useSelector((state) => state.app.user);
   const checkLoggedIn =
     Object.keys(loggedIn).length > 0 || localStorage.getItem("user")
@@ -13,11 +15,17 @@ const Header = () => {
   return (
     <div className="app-header">
       <h2>Social Media</h2>
-      {/* {checkLoggedIn && (
-        <span onClick={() => dispatch(toggleDrawer())}>
-          <img src={menu} alt="logo" className="icon" />
+      {checkLoggedIn && (
+        <span
+          style={{ marginRight: "1rem" }}
+          onClick={async () => {
+            await dispatch(logout());
+            history.push("/login");
+          }}
+        >
+          <img src={logouticon} alt="logout" className="icon" />
         </span>
-      )} */}
+      )}
     </div>
   );
 };
