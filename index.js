@@ -10,18 +10,16 @@ const schema = require("./schema");
 
 const port = process.env.PORT || 5000;
 const app = express();
+require("dotenv").config();
 
 app.use(cors(), bodyParser.json());
 
 mongoose
-  .connect(
-    `mongodb+srv://admin:harsh123@socialmedia.17u05.mongodb.net/social-media?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: true,
-    }
-  )
+  .connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+  })
   .then(() => console.log("Database Connected"))
   .catch((err) => console.log(err));
 
