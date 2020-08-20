@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
-// import { Provider, defaultTheme, Flex } from "@adobe/react-spectrum";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Landing from "./components/Landing";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -33,6 +34,7 @@ const App = () => {
         </Switch>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

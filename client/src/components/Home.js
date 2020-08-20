@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { toast } from "react-toastify";
 import CreatePost from "./CreatePost";
 import { useQuery } from "@apollo/react-hooks";
 import { getPosts } from "../queries";
@@ -15,6 +16,16 @@ const Home = () => {
     onCompleted: (data) => {
       console.log(data);
       setPosts(data.getPosts);
+    },
+    onError: (error) => {
+      toast.error("Could not fetch posts, Please try again", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
   });
   //   console.log(posts);

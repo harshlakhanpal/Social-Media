@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
 import { createPost, getPosts } from "../queries";
 import { useHistory } from "react-router-dom";
@@ -25,9 +26,25 @@ const CreatePost = () => {
     //  pollInterval: 0,
     onCompleted: () => {
       history.push("/home");
+      toast.success("Post created successfully", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
     onError: (error) => {
-      console.log("Error", error);
+      console.log(error.graphQLErrors);
+      toast.error("Something went wrong, Please try again.", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
   });
   return (

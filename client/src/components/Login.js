@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { login } from "../queries";
+import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login as loginAction } from "../store/app/actions";
@@ -24,8 +25,26 @@ const Login = () => {
       dispatch(loginAction(data.login));
       localStorage.setItem("token", JSON.stringify(data.login.token));
       localStorage.setItem("user", JSON.stringify(data.login));
-
       history.push("/home");
+      toast.success(`Hello ${data.login.user.username}`, {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
+    },
+
+    onError: () => {
+      toast.error("Please enter your credentials again.", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
   });
 

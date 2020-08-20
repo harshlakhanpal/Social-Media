@@ -7,6 +7,7 @@ import {
   deletePost,
   deleteComment,
 } from "../queries";
+import { toast } from "react-toastify";
 import del from "../assets/icons/delete.svg";
 import emptyHeart from "../assets/icons/heart.svg";
 import filledHeart from "../assets/icons/heart-filled.svg";
@@ -36,6 +37,16 @@ const Post = () => {
       await setPostLikes(data.getPost.likes);
       await setLikeCount(data.getPost.likes.length);
     },
+    onError: (error) => {
+      toast.error("Could not fetch post, Please try again", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
+    },
   });
 
   let [newComment] = useMutation(createComment, {
@@ -46,9 +57,24 @@ const Post = () => {
     onCompleted: async (data) => {
       await setPost(data.createComment);
       await setBody("");
+      toast.success("Comment added.", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
     onError: (error) => {
-      console.log("Error", error);
+      toast.success("Post created successfully", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+      });
     },
   });
 
