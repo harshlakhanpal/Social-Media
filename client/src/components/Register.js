@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 // import * as compose from "lodash.flowright";
-
+import { toast } from "react-toastify";
 import { register } from "../queries";
 import { useHistory } from "react-router-dom";
 
@@ -14,14 +14,30 @@ const Register = () => {
   const [userRegister, { loading }] = useMutation(register);
 
   const userRegistration = async () => {
-    try {
-      userRegister({
-        variables: { username, email, password, confirmPassword },
-      });
-      history.push("/login");
-    } catch (error) {
-      console.log(Object.keys(error), error.message);
-    }
+    userRegister({
+      variables: { username, email, password, confirmPassword },
+      onCompleted: async (data) => {
+        toast.success("User registered successfully", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+        });
+      },
+      onError: (error) => {
+        toast.error("User registration failed,Please try again", {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+        });
+      },
+    });
+    history.push("/login");
   };
 
   return (

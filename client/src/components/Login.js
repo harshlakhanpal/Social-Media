@@ -26,7 +26,7 @@ const Login = () => {
       localStorage.setItem("token", JSON.stringify(data.login.token));
       localStorage.setItem("user", JSON.stringify(data.login));
       history.push("/home");
-      toast.success(`Hello ${data.login.user.username}`, {
+      toast.success(`You are now logged in}`, {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: true,
@@ -36,7 +36,8 @@ const Login = () => {
       });
     },
 
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       toast.error("Please enter your credentials again.", {
         position: "top-center",
         autoClose: 1500,

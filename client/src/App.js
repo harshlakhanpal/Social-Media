@@ -34,7 +34,14 @@ const App = () => {
         </Switch>
       </div>
       <Footer />
-      <ToastContainer />
+      <ToastContainer
+        style={{
+          textAlign: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      />
     </div>
   );
 };
