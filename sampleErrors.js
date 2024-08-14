@@ -49,6 +49,23 @@ function complexExpression(a, b) {
   return a * (b + (3 / 2)) - ((b / 4) * a) + ((a % b) * (b ** 2));
 }
 
+var x = 10;
+    var y;
+    
+    function test() {
+        if (x == 10) {
+            console.log("x is 10"); // Missing semicolon
+        }
+        y = 20; // y is defined but never used
+        z = 30; // z is undefined
+    }
+    
+    function unusedFunction() {
+        var unusedVar = 50;
+    }
+    
+    test();
+
 // 6. Deprecated API usage (using older versions of APIs or libraries)
 const http = require('http');
 const server = http.createServer(function (req, res) {
