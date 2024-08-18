@@ -4,9 +4,9 @@
 function veryLongFunction() {
   let a = 0;
   for (let i = 0; i < 100; i++) {
-    a += i;
+    a += i
     // Simulating a long function body with excessive logic
-    if (i % 10 === 0) {
+    if (i % 10 == 0) {
       console.log("Checkpoint:", i);
     }
   }
@@ -17,7 +17,7 @@ function veryLongFunction() {
 function deeplyNestedFunction(x) {
   if (x > 10) {
     if (x < 20) {
-      if (x % 2 === 0) {
+      if (x % 2 == 0) {
         console.log("Even number between 10 and 20");
       } else {
         console.log("Odd number between 10 and 20");
